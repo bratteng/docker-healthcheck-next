@@ -17,3 +17,14 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           version: v1.31
           working-directory: healthcheck
+
+  dockerfilelint:
+    name: Dockerfile lint
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Hadolint with reviewdog
+        uses: reviewdog/action-hadolint@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          hadolint_ignore: DL3008
