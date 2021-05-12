@@ -19,6 +19,8 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: ombratteng/healthcheck-next
+          flavor: |
+            latest=true
 
       -
         name: Set up Docker Buildx
