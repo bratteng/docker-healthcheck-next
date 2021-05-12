@@ -21,6 +21,8 @@ jobs:
           images: ombratteng/healthcheck-next
           flavor: |
             latest=true
+          tags: |
+            type=sha
 
       -
         name: Set up Docker Buildx
