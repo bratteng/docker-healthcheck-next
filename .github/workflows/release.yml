@@ -8,9 +8,6 @@ on:
 jobs:
   build-and-release:
     runs-on: ubuntu-20.04
-    needs:
-      - golanglint
-      - dockerfilelint
     steps:
       -
         name: Checkout code
