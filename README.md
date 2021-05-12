@@ -6,3 +6,7 @@
 ```console
 docker pull bratteng/healthcheck-next:latest
 ```
+
+```console
+docker pull ghcr.io/bratteng/healthcheck-next:latest
+```
