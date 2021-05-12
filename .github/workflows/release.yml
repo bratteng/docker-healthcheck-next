@@ -18,7 +18,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v3
         with:
-          images: ombratteng/healthcheck-next
+          images: bratteng/healthcheck-next
           flavor: |
             latest=true
           tags: |

@@ -4,5 +4,5 @@
 [![release](https://github.com/bratteng/docker-healthcheck-next/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/bratteng/docker-healthcheck-next/actions/workflows/release.yml)
 
 ```console
-docker pull ghcr.io/bratteng/healthcheck-next:latest
+docker pull bratteng/healthcheck-next:latest
 ```
