@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+
+	log "github.com/sirupsen/logrus"
 )
 
 const (
@@ -13,22 +15,21 @@ const (
 
 func main() {
 	if len(os.Args) != 2 {
-		fmt.Printf("Usage: %s <port>\n", os.Args[0])
-		os.Exit(1)
+		log.Fatalf("Usage: %s <port>\n", os.Args[0])
 	}
 
-	resp, err := http.Get(fmt.Sprintf("http://%s:%s/%s", host, os.Args[1], uri))
+	port := os.Args[1]
+	endpoint := fmt.Sprintf("http://%s:%s/%s", host, port, uri)
+
+	log.Infof("Querying %s", endpoint)
+	resp, err := http.Get(endpoint)
 	if err != nil {
-		fmt.Printf("Error: could not query %s:%s: %+v\n", host, os.Args[1], err)
-		os.Exit(1)
+		log.Fatal(err)
 	}
 
 	defer resp.Body.Close()
 
 	if resp.StatusCode > 399 {
-		fmt.Printf("Error: status code returned was %d\n", resp.StatusCode)
-		os.Exit(1)
+		log.Fatal("Status code returned was ", resp.StatusCode)
 	}
-
-	// exit 0
 }
