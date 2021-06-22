@@ -23,15 +23,22 @@ func main() {
 
 	flag.Parse()
 
+	client := &http.Client{}
 	protocol := "http"
 	if Flags.https {
 		protocol = "https"
 	}
 
 	endpoint := fmt.Sprintf("%s://%s:%s/%s", protocol, Flags.host, Flags.port, Flags.path)
+	req, err := http.NewRequest("GET", endpoint, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	req.Header.Set("User-Agent", "Bratteng-Healthcheck-Client/1.0.0")
 
 	log.Infof("Querying %s", endpoint)
-	resp, err := http.Get(endpoint)
+	resp, err := client.Do(req)
 	if err != nil {
 		log.Fatal(err)
 	}
