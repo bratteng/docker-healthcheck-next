@@ -34,8 +34,8 @@ jobs:
           labels: |
             org.opencontainers.image.description=Healthcheck binary specific for Next.js [${{matrix.flavor}}]
           images: |
-            ghcr.io/bratteng/healthcheck-next
-            bratteng/healthcheck-next
+            ghcr.io/bratteng/healthcheck
+            bratteng/healthcheck
           flavor: |
             latest=${{matrix.latest}}
           tags: |
