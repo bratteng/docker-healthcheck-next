@@ -1,25 +1,34 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"net/http"
-	"os"
 
 	log "github.com/sirupsen/logrus"
 )
 
-const (
-	host = "localhost"
-	uri  = "api/_health"
-)
+var Flags struct {
+	https bool
+	port  string
+	host  string
+	path  string
+}
 
 func main() {
-	if len(os.Args) != 2 {
-		log.Fatalf("Usage: %s <port>\n", os.Args[0])
+	flag.BoolVar(&Flags.https, "https", false, "Connect via HTTPS")
+	flag.StringVar(&Flags.port, "port", "3000", "Which port to connect to")
+	flag.StringVar(&Flags.host, "host", "localhost", "Which host to connect to")
+	flag.StringVar(&Flags.path, "path", "api/_health", "Which path to check")
+
+	flag.Parse()
+
+	protocol := "http"
+	if Flags.https {
+		protocol = "https"
 	}
 
-	port := os.Args[1]
-	endpoint := fmt.Sprintf("http://%s:%s/%s", host, port, uri)
+	endpoint := fmt.Sprintf("%s://%s:%s/%s", protocol, Flags.host, Flags.port, Flags.path)
 
 	log.Infof("Querying %s", endpoint)
 	resp, err := http.Get(endpoint)
