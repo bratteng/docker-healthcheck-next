@@ -6,7 +6,7 @@ COPY healthcheck.go .
 COPY go.mod .
 COPY go.sum .
 
-RUN CGO_ENABLED=0 go build -ldflags '-w -s -extldflags "-static"' -o /healthcheck /go/src/healthcheck/
+RUN GOOS=linux GOARCH=amd64 go build -ldflags '-w -s' -o /healthcheck /go/src/healthcheck/
 
 FROM debian:buster-slim
 COPY --from=build /healthcheck /healthcheck
